@@ -1,0 +1,23 @@
+{
+  "name": "studio-example-minimal",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Minimal example of syncing design tokens from Tokens Studio and building with Style Dictionary",
+  "scripts": {
+    "setup": "npx tokensstudio setup",
+    "pull": "npx tokensstudio pull",
+    "build": "node build-tokens.js"
+  },
+  "keywords": [
+    "design-tokens",
+    "tokens-studio",
+    "style-dictionary"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@tokens-studio/sdk": "^3.0.0",
+    "@tokens-studio/sd-transforms": "^2.0.0",
+    "style-dictionary": "^5.0.0"
+  }
+}
+
