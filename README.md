@@ -55,9 +55,7 @@ The `.tokensstudio.json` file contains your Tokens Studio configuration:
 
 ## Output
 
-Built files are generated in the `studio-export/build/` directory, organized by platform:
-- `build/css/` - CSS and SCSS variables (from web.js)
-- `build/android/` - Android XML resources (from Android.js)
+Built files are generated according to the build paths defined in each platform's configuration file (pulled from Tokens Studio). The output format and location depend on your Studio configuration settings.
 
 ## Automated Token Syncing
 
