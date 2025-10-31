@@ -6,7 +6,7 @@
   "scripts": {
     "setup": "npx tokensstudio setup",
     "pull": "npx tokensstudio pull",
-    "build": "node build-tokens.js"
+    "build:web": "node studio-export/web.js"
   },
   "keywords": [
     "design-tokens",

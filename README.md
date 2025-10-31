@@ -34,16 +34,26 @@ This will download tokens and Style Dictionary configurations to the `studio-exp
 
 ### Build Tokens
 
-Build tokens for a specific platform:
+After pulling tokens, check the `studio-export` directory to see which platform configurations were exported from your Tokens Studio project:
 
 ```bash
-npm run build web        # Builds CSS/SCSS from web.js
-npm run build Android    # Builds Android XML from Android.js
+ls studio-export/
 ```
 
-This will execute the corresponding configuration file in the `studio-export` directory and generate the platform-specific output files.
+Each `.js` file represents a platform configuration (e.g., `web.js`, `ios.js`, `android.js`). Run the build scripts directly for the platforms you've configured in Tokens Studio:
 
-**Note:** The platform name must match the exact filename (case-sensitive). For example, if you have `Android.js`, use `npm run build Android`.
+```bash
+node studio-export/web.js        # If you have a web platform configured
+node studio-export/android.js    # If you have an android platform configured
+```
+
+You can also add npm scripts in `package.json` for convenience:
+
+```json
+"scripts": {
+  "build:web": "node studio-export/web.js"
+}
+```
 
 ## Configuration
 

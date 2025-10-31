@@ -37,8 +37,7 @@ jobs:
       # 5. Build tokens for all platforms
       - name: Build Design Tokens
         run: |
-          npm run build web
-          npm run build Android
+          npm run build:web
 
       # 6. Commit files and create PR
       - name: Commit and Create PR
