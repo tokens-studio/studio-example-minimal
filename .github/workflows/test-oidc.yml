@@ -23,4 +23,4 @@ jobs:
         run: npm install -g @tokens-studio/studio-cli
 
       - name: Pull tokens via OIDC
-        run: studio pull --ci
+        run: studio tokens pull --ci
