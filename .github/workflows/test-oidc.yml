@@ -1,0 +1,21 @@
+name: "Test OIDC Auth"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-oidc:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write    # Required for OIDC token
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install studio CLI
+        run: curl -fsSL https://tokens.studio/install.sh | bash
+
+      - name: Pull tokens via OIDC
+        run: studio pull --ci

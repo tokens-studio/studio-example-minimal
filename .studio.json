@@ -1,0 +1,13 @@
+{
+  "$schema": "https://tokens.studio/schema/cli",
+  "configurations": {
+    "pantry": {
+      "project": "b4e48cad-d5d2-4a16-9add-e87429df8273",
+      "ref": {
+        "type": "branch",
+        "name": "main"
+      },
+      "output": "dist/tokens"
+    }
+  }
+}
