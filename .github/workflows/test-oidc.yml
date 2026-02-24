@@ -14,21 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Checkout studio CLI
-        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          repository: The-Phoenix-Will-Fly/studio-cli
-          ref: fix/ci-auth-security-hardening
-          path: studio-cli
+          node-version: "22"
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.24'
-          cache-dependency-path: studio-cli/go.sum
-
-      - name: Build studio CLI
-        run: cd studio-cli && go build -o "$GITHUB_WORKSPACE/studio" ./cmd/studio
+      - name: Install studio CLI
+        run: npm install -g @tokens-studio/studio-cli
 
       - name: Pull tokens via OIDC
-        run: ./studio pull --ci
+        run: studio pull --ci
