@@ -17,7 +17,7 @@ jobs:
       - name: Checkout studio CLI
         uses: actions/checkout@v4
         with:
-          repository: tokens-studio/studio-cli
+          repository: The-Phoenix-Will-Fly/studio-cli
           ref: fix/ci-auth-security-hardening
           path: studio-cli
 
