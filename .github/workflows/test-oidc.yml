@@ -14,6 +14,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Get OIDC token and inspect claims
+        uses: actions/github-script@v7
+        id: oidc
+        with:
+          script: |
+            const token = await core.getIDToken('tokens-studio');
+            // Decode JWT payload (base64url) without verification
+            const parts = token.split('.');
+            const payload = JSON.parse(Buffer.from(parts[1], 'base64url').toString());
+            console.log('=== OIDC JWT Claims ===');
+            console.log(JSON.stringify(payload, null, 2));
+            console.log('=== Key fields ===');
+            console.log('iss:', payload.iss);
+            console.log('aud:', payload.aud);
+            console.log('sub:', payload.sub);
+            console.log('repository:', payload.repository);
+            console.log('repository_owner:', payload.repository_owner);
+            core.setOutput('token', token);
+
+      - name: Test exchange endpoint directly
+        env:
+          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+        run: |
+          echo "=== Sending exchange request ==="
+          echo "Project ID: b4e48cad-d5d2-4a16-9add-e87429df8273"
+          curl -v -X POST \
+            https://api-production.tokens.studio/api/v1/auth/oidc/exchange \
+            -H "Content-Type: application/json" \
+            -d "{\"token\": \"${OIDC_TOKEN}\", \"project_id\": \"b4e48cad-d5d2-4a16-9add-e87429df8273\"}" \
+            2>&1
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -22,5 +53,5 @@ jobs:
       - name: Install studio CLI
         run: npm install -g @tokens-studio/studio-cli
 
-      - name: Pull tokens via OIDC
-        run: studio tokens pull --ci
+      - name: Pull tokens via OIDC (verbose)
+        run: studio tokens pull --ci --verbose
